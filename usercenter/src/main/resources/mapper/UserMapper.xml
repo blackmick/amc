@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.mapper">
+    <resultMap id="userMapper" type="User">
+        <id property="id" column="id"/>
+        <result property="createBy" column="c_create_by"/>
+        <result property="createDate" column="c_create_time"/>
+        <result property="updateBy" column="c_update_by"/>
+        <result property="updateDate" column="c_update_time"/>
+        <result property="deleteFlag" column="c_delete"/>
+        <result property="status" column="c_status"/>
+        <result property="prcid" column="c_prcid"/>
+        <result property="cashCard" column="c_cash_card"/>
+        <result property="name" column="c_name"/>
+        <result property="extra_0" column="c_extra_0"/>
+        <result property="extra_1" column="c_extra_1"/>
+        <result property="extra_2" column="c_extra_2"/>
+    </resultMap>
+    
+    <select id="getAllUser" resultMap="userMapper">
+        SELECT
+            id, c_create_by, c_create_time, c_update_by, c_update_time, c_delete, c_status, c_prcid,
+            c_name, c_cash_card, c_extra_0, c_extra_1, c_extra_2
+        FROM
+            tbl_user;
+    </select>
+
+    <select id="getUser" resultMap="userMapper">
+        SELECT
+            id, c_create_by, c_create_time, c_update_by, c_update_time, c_delete, c_status, c_prcid,
+            c_name, c_cash_card, c_extra_0, c_extra_1, c_extra_2
+        FROM
+            tbl_user
+        WHERE id = '#{id}';
+    </select>
+
+    <insert id="add" parameterType="User">
+        INSERT INTO
+            tbl_user (c_prcid, c_name, c_cash_card)
+        VALUES
+            (#{prcid}, #{name}, #{cashCard});
+    </insert>
+
+    <delete id="removeUser" parameterType="long">
+        UPDATE
+            tbl_user
+        SET
+            c_delete = 1
+        WHERE
+            id = '#{id}';
+    </delete>
+</mapper>
