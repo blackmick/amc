@@ -2,7 +2,7 @@ package com.baidu.fpu.usercenter.model.po;
 
 import java.util.Date;
 
-public class User {
+public class UserChannelMapping {
     private Long id;
 
     private String cCreateBy;
@@ -17,11 +17,9 @@ public class User {
 
     private Byte cStatus;
 
-    private String cPrcid;
+    private Long cUserId;
 
-    private String cName;
-
-    private String cCashCard;
+    private Long cChannelMappingId;
 
     private String cExtra0;
 
@@ -85,28 +83,20 @@ public class User {
         this.cStatus = cStatus;
     }
 
-    public String getcPrcid() {
-        return cPrcid;
+    public Long getcUserId() {
+        return cUserId;
     }
 
-    public void setcPrcid(String cPrcid) {
-        this.cPrcid = cPrcid == null ? null : cPrcid.trim();
+    public void setcUserId(Long cUserId) {
+        this.cUserId = cUserId;
     }
 
-    public String getcName() {
-        return cName;
+    public Long getcChannelMappingId() {
+        return cChannelMappingId;
     }
 
-    public void setcName(String cName) {
-        this.cName = cName == null ? null : cName.trim();
-    }
-
-    public String getcCashCard() {
-        return cCashCard;
-    }
-
-    public void setcCashCard(String cCashCard) {
-        this.cCashCard = cCashCard == null ? null : cCashCard.trim();
+    public void setcChannelMappingId(Long cChannelMappingId) {
+        this.cChannelMappingId = cChannelMappingId;
     }
 
     public String getcExtra0() {
