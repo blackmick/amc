@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.baidu.fpu.usercenter.dao.ChannelUserDao">
+    <resultMap id="userResultMap" type="com.baidu.fpu.usercenter.model.po.ChannelUser">
+        <id property="id" column="id"/>
+        <result property="cCreateBy" column="c_create_by"/>
+        <result property="cCreateTime" column="c_create_time"/>
+        <result property="cUpdateBy" column="c_update_by"/>
+        <result property="cUpdateTime" column="c_update_time"/>
+        <result property="cDelete" column="c_delete"/>
+        <result property="cStatus" column="c_status"/>
+        <result property="cChannelId" column="c_channel_id"/>
+        <result property="cChannelUserId" column="c_channel_user_id"/>
+        <result property="cPrcid" column="c_prcid"/>
+        <result property="cCashCard" column="c_cash_card"/>
+        <result property="cPhoneNumber" column="c_phone_number"/>
+        <result property="cPhoto" column="c_photo"/>
+        <result property="cIdPhoto" column="c_id_photo"/>
+        <result property="cCloudId" column="c_cloud_id"/>
+        <result property="cRegPosition" column="c_reg_postion"/>
+        <result property="cSalt" column="c_salt"/>
+        <result property="cPassword" column="c_password"/>
+        <!--<result property="cName" column="c_name"/>-->
+        <result property="cExtra0" column="c_extra_0"/>
+        <result property="cExtra1" column="c_extra_1"/>
+        <result property="cExtra2" column="c_extra_2"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.baidu.fpu.usercenter.model.po.ChannelUser">
+        INSERT INTO
+        tbl_channel_user (c_prcid, c_phone_number, c_photo, c_id_photo, c_cloud_id, c_reg_position,
+                          c_salt, c_password, c_cash_card, c_create_time, c_update_time, c_delete, c_status)
+        VALUES
+        (#{cPrcid}, #{cPhoneNumber}, #{cPhoto}, #{cIdPhoto}, #{cCloudId}, #{cRegPosition},
+          #{cSalt}, #{cPassword}, #{cCashCard}, now(), now(), 0, 0);
+    </insert>
+
+    <select id="get" parameterType="long" resultMap="userResultMap">
+        SELECT * FROM tbl_channel_user WHERE id=#{id};
+    </select>
+
+    <select id="get" parameterType="long, long" resultMap="userResultMap">
+        SELECT * FROM tbl_channel_user WHERE c_channel = #{channel_id} and c_channel_user_id=#{channel_user_id};
+    </select>
+
+    <update id="update" parameterType="com.baidu.fpu.usercenter.model.po.ChannelUser">
+        UPDATE tbl_channel_user SET
+        WHERE id=#{id}
+        ;
+    </update>
+</mapper>

@@ -8,9 +8,9 @@ set -x
 
 ROOT_PATH=`pwd`
 
-THRIFT_PATH=$ROOT_PATH'/usercenter/src/thrift'
-JAVA_SRC_PATH=$ROOT_PATH'/usercenter/src'
-TEST_SCRIPT_PATH=$ROOT_PATH'/testScript'
+THRIFT_PATH=$ROOT_PATH
+JAVA_SRC_PATH=$ROOT_PATH'../'
+TEST_SCRIPT_PATH=$ROOT_PATH'../../testScript'
 
 #CMD='thrift --gen '
 #CMD_JAVA=$CMD'java '$THRIFT_PATH'/*.thrift'
@@ -23,10 +23,10 @@ TEST_SCRIPT_PATH=$ROOT_PATH'/testScript'
 
 for INPUT_FILE in `ls $THRIFT_PATH/*.thrift`;
 do 
-    thrift --gen -o java $THRIFT_PATH $INPUT_FILE
-    thrift --gen py -o $THRIFT_PATH $INPUT_FILE
+    thrift --gen java  $INPUT_FILE
+    thrift --gen py $INPUT_FILE
 done
-cp -r $THRIFT_PATH/gen-java/* $JAVA_SRC_PATH
-cp -r $THRIFT_PATH/gen-py/* $TEST_SCRIPT_PATH
+#cp -r $THRIFT_PATH/gen-java/* $JAVA_SRC_PATH
+#cp -r $THRIFT_PATH/gen-py/* $TEST_SCRIPT_PATH
 
 set +x

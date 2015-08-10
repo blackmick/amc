@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mybatis.mapper">
-    <resultMap id="userMapper" type="User">
+<mapper namespace="com.baidu.fpu.usercenter.dao.UserDao">
+    <resultMap id="userResultMap" type="com.baidu.fpu.usercenter.model.po.User">
         <id property="id" column="id"/>
         <result property="cCreateBy" column="c_create_by"/>
-        <result property="cCreateDate" column="c_create_time"/>
+        <result property="cCreateTime" column="c_create_time"/>
         <result property="cUpdateBy" column="c_update_by"/>
-        <result property="cUpdateDate" column="c_update_time"/>
-        <result property="cDeleteFlag" column="c_delete"/>
+        <result property="cUpdateTime" column="c_update_time"/>
+        <result property="cDelete" column="c_delete"/>
         <result property="cStatus" column="c_status"/>
         <result property="cPrcid" column="c_prcid"/>
         <result property="cCashCard" column="c_cash_card"/>
@@ -17,37 +17,15 @@
         <result property="cExtra1" column="c_extra_1"/>
         <result property="cExtra2" column="c_extra_2"/>
     </resultMap>
-    
-    <select id="getAllUser" resultMap="userMapper">
-        SELECT
-            id, c_create_by, c_create_time, c_update_by, c_update_time, c_delete, c_status, c_prcid,
-            c_name, c_cash_card, c_extra_0, c_extra_1, c_extra_2
-        FROM
-            tbl_user;
-    </select>
 
-    <select id="getUser" resultMap="userMapper">
-        SELECT
-            id, c_create_by, c_create_time, c_update_by, c_update_time, c_delete, c_status, c_prcid,
-            c_name, c_cash_card, c_extra_0, c_extra_1, c_extra_2
-        FROM
-            tbl_user
-        WHERE id = '#{id}';
-    </select>
-
-    <insert id="add" parameterType="User">
+    <insert id="add" parameterType="com.baidu.fpu.usercenter.model.po.User">
         INSERT INTO
-            tbl_user (c_prcid, c_name, c_cash_card)
+            tbl_user (c_prcid, c_name, c_cash_card, c_create_time, c_update_time)
         VALUES
-            (#{prcid}, #{name}, #{cashCard});
+            (#{cPrcid}, #{cName}, #{cCashCard}, now(), now());
     </insert>
 
-    <delete id="removeUser" parameterType="long">
-        UPDATE
-            tbl_user
-        SET
-            c_delete = 1
-        WHERE
-            id = '#{id}';
-    </delete>
+    <select id="get" parameterType="long" resultMap="userResultMap">
+        SELECT * FROM tbl_user WHERE id=#{id}
+    </select>
 </mapper>

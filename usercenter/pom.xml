@@ -41,6 +41,12 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
         <dependency>
             <groupId>commons-pool</groupId>
             <artifactId>commons-pool</artifactId>
@@ -222,7 +228,23 @@
                     <overwrite>true</overwrite>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>8080</port>
+                    <path>/</path>
+                    <uriEncoding>UTF-8</uriEncoding>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.25</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
 

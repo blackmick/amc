@@ -1,7 +1,5 @@
 package com.baidu.fpu.usercenter.common.service;
 
-import com.baidu.fpu.usercenter.model.dto.queryRequest;
-import com.baidu.fpu.usercenter.model.dto.queryResponse;
 import com.baidu.fpu.usercenter.rpc.querySerivce.Iface;
 import org.apache.thrift.TException;
 import org.slf4j.Logger;

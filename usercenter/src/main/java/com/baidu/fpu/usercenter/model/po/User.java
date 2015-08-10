@@ -1,5 +1,8 @@
 package com.baidu.fpu.usercenter.model.po;
 
+import com.baidu.fpu.usercenter.common.util.ClassUtil;
+
+import java.lang.reflect.Field;
 import java.util.Date;
 
 public class User {
@@ -131,5 +134,9 @@ public class User {
 
     public void setcExtra2(String cExtra2) {
         this.cExtra2 = cExtra2 == null ? null : cExtra2.trim();
+    }
+
+    public String toString(){
+        return ClassUtil.toString(this);
     }
 }

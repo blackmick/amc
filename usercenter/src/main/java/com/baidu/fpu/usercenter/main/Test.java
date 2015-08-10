@@ -1,6 +1,6 @@
 package com.baidu.fpu.usercenter.main;
 
-import com.baidu.fpu.usercenter.service.Server;
+import com.baidu.fpu.usercenter.schedule.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
