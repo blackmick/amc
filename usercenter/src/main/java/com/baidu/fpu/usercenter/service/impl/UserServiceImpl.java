@@ -27,4 +27,8 @@ public class UserServiceImpl implements UserService{
     public User getUser(long id){
         return userDao.get(id);
     }
+
+    public int update(User user){
+        return userDao.update(user);
+    }
 }

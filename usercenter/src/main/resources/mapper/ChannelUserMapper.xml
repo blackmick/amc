@@ -10,6 +10,7 @@
         <result property="cUpdateTime" column="c_update_time"/>
         <result property="cDelete" column="c_delete"/>
         <result property="cStatus" column="c_status"/>
+        <result property="cUid" column="c_uid"/>
         <result property="cChannelId" column="c_channel_id"/>
         <result property="cChannelUserId" column="c_channel_user_id"/>
         <result property="cPrcid" column="c_prcid"/>
@@ -36,17 +37,18 @@
           #{cSalt}, #{cPassword}, #{cCashCard}, now(), now(), 0, 0);
     </insert>
 
-    <select id="get" parameterType="long" resultMap="userResultMap">
+    <select id="getById" parameterType="long" resultMap="userResultMap">
         SELECT * FROM tbl_channel_user WHERE id=#{id};
     </select>
 
-    <select id="get" parameterType="long, long" resultMap="userResultMap">
+    <select id="getByChannel" parameterType="long, long" resultMap="userResultMap">
         SELECT * FROM tbl_channel_user WHERE c_channel = #{channel_id} and c_channel_user_id=#{channel_user_id};
     </select>
 
     <update id="update" parameterType="com.baidu.fpu.usercenter.model.po.ChannelUser">
         UPDATE tbl_channel_user SET
-        WHERE id=#{id}
-        ;
+            c_channel = #{cChannelId},
+            c_channel_uid = #{cChannelUserId}
+        WHERE id=#{id};
     </update>
 </mapper>

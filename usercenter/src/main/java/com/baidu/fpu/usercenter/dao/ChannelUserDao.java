@@ -7,7 +7,7 @@ import com.baidu.fpu.usercenter.model.po.ChannelUser;
  */
 public interface ChannelUserDao {
     public int add(ChannelUser data);
-    public ChannelUser get(long id);
-    public ChannelUser get(long channelId, long channelUid);
+    public ChannelUser getById(long id);
+    public ChannelUser getByChannel(long channelId, long channelUid);
     public int update(ChannelUser data);
 }

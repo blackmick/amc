@@ -13,6 +13,8 @@ public class ChannelUser {
 
     private Byte cStatus;
 
+    private Long cUid;
+
     private Long cChannelId;
 
     private Long cChannelUserId;
@@ -83,6 +85,14 @@ public class ChannelUser {
 
     public void setcStatus(Byte cStatus) {
         this.cStatus = cStatus;
+    }
+
+    public Long getcUid(){
+        return cUid;
+    }
+
+    public void setcUid(Long cUid){
+        this.cUid = cUid;
     }
 
     public Long getcChannelId() {

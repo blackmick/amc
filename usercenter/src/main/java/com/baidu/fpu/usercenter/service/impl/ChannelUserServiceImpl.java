@@ -23,11 +23,11 @@ public class ChannelUserServiceImpl implements ChannelUserService {
 
     @Override
     public ChannelUser get(long id){
-        return channelUserDao.get(id);
+        return channelUserDao.getById(id);
     }
 
     public ChannelUser get(long channelId, long channelUid){
-        return channelUserDao.get(channelId, channelUid);
+        return channelUserDao.getByChannel(channelId, channelUid);
     }
 
     public int update(ChannelUser data){
