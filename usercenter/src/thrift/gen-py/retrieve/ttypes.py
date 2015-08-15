@@ -127,7 +127,7 @@ class RetrieveResponse:
 
   thrift_spec = (
     None, # 0
-    (1, TType.I32, 'status', None, None, ), # 1
+    (1, TType.I64, 'status', None, None, ), # 1
     (2, TType.STRING, 'message', None, None, ), # 2
     (3, TType.STRING, 'fbuId', None, None, ), # 3
     (4, TType.STRUCT, 'data', (public.ttypes.UserData, public.ttypes.UserData.thrift_spec), None, ), # 4
@@ -149,8 +149,8 @@ class RetrieveResponse:
       if ftype == TType.STOP:
         break
       if fid == 1:
-        if ftype == TType.I32:
-          self.status = iprot.readI32();
+        if ftype == TType.I64:
+          self.status = iprot.readI64();
         else:
           iprot.skip(ftype)
       elif fid == 2:
@@ -180,8 +180,8 @@ class RetrieveResponse:
       return
     oprot.writeStructBegin('RetrieveResponse')
     if self.status is not None:
-      oprot.writeFieldBegin('status', TType.I32, 1)
-      oprot.writeI32(self.status)
+      oprot.writeFieldBegin('status', TType.I64, 1)
+      oprot.writeI64(self.status)
       oprot.writeFieldEnd()
     if self.message is not None:
       oprot.writeFieldBegin('message', TType.STRING, 2)

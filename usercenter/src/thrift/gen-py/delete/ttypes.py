@@ -26,8 +26,8 @@ class DeleteRequest:
 
   thrift_spec = (
     None, # 0
-    (1, TType.I64, 'channelId', None, None, ), # 1
-    (2, TType.I64, 'channelUid', None, None, ), # 2
+    (1, TType.STRING, 'channelId', None, None, ), # 1
+    (2, TType.STRING, 'channelUid', None, None, ), # 2
   )
 
   def __init__(self, channelId=None, channelUid=None,):
@@ -44,13 +44,13 @@ class DeleteRequest:
       if ftype == TType.STOP:
         break
       if fid == 1:
-        if ftype == TType.I64:
-          self.channelId = iprot.readI64();
+        if ftype == TType.STRING:
+          self.channelId = iprot.readString();
         else:
           iprot.skip(ftype)
       elif fid == 2:
-        if ftype == TType.I64:
-          self.channelUid = iprot.readI64();
+        if ftype == TType.STRING:
+          self.channelUid = iprot.readString();
         else:
           iprot.skip(ftype)
       else:
@@ -64,12 +64,12 @@ class DeleteRequest:
       return
     oprot.writeStructBegin('DeleteRequest')
     if self.channelId is not None:
-      oprot.writeFieldBegin('channelId', TType.I64, 1)
-      oprot.writeI64(self.channelId)
+      oprot.writeFieldBegin('channelId', TType.STRING, 1)
+      oprot.writeString(self.channelId)
       oprot.writeFieldEnd()
     if self.channelUid is not None:
-      oprot.writeFieldBegin('channelUid', TType.I64, 2)
-      oprot.writeI64(self.channelUid)
+      oprot.writeFieldBegin('channelUid', TType.STRING, 2)
+      oprot.writeString(self.channelUid)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()
@@ -102,16 +102,19 @@ class DeleteRequest:
 class DeleteResponse:
   """
   Attributes:
-   - status
+   - errCode
+   - errMessage
   """
 
   thrift_spec = (
     None, # 0
-    (1, TType.I32, 'status', None, None, ), # 1
+    (1, TType.I64, 'errCode', None, None, ), # 1
+    (2, TType.STRING, 'errMessage', None, None, ), # 2
   )
 
-  def __init__(self, status=None,):
-    self.status = status
+  def __init__(self, errCode=None, errMessage=None,):
+    self.errCode = errCode
+    self.errMessage = errMessage
 
   def read(self, iprot):
     if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
@@ -123,8 +126,13 @@ class DeleteResponse:
       if ftype == TType.STOP:
         break
       if fid == 1:
-        if ftype == TType.I32:
-          self.status = iprot.readI32();
+        if ftype == TType.I64:
+          self.errCode = iprot.readI64();
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.STRING:
+          self.errMessage = iprot.readString();
         else:
           iprot.skip(ftype)
       else:
@@ -137,20 +145,27 @@ class DeleteResponse:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('DeleteResponse')
-    if self.status is not None:
-      oprot.writeFieldBegin('status', TType.I32, 1)
-      oprot.writeI32(self.status)
+    if self.errCode is not None:
+      oprot.writeFieldBegin('errCode', TType.I64, 1)
+      oprot.writeI64(self.errCode)
+      oprot.writeFieldEnd()
+    if self.errMessage is not None:
+      oprot.writeFieldBegin('errMessage', TType.STRING, 2)
+      oprot.writeString(self.errMessage)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()
 
   def validate(self):
+    if self.errCode is None:
+      raise TProtocol.TProtocolException(message='Required field errCode is unset!')
     return
 
 
   def __hash__(self):
     value = 17
-    value = (value * 31) ^ hash(self.status)
+    value = (value * 31) ^ hash(self.errCode)
+    value = (value * 31) ^ hash(self.errMessage)
     return value
 
   def __repr__(self):

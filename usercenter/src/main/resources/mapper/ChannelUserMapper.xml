@@ -41,7 +41,7 @@
         SELECT * FROM tbl_channel_user WHERE id=#{id};
     </select>
 
-    <select id="getByChannel" parameterType="long, long" resultMap="userResultMap">
+    <select id="getByChannel" parameterType="String, String" resultMap="userResultMap">
         SELECT * FROM tbl_channel_user WHERE c_channel = #{channel_id} and c_channel_user_id=#{channel_user_id};
     </select>
 

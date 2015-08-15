@@ -34,7 +34,7 @@ class UserData:
   thrift_spec = (
     None, # 0
     (1, TType.I64, 'fbuId', None, None, ), # 1
-    (2, TType.I32, 'status', None, None, ), # 2
+    (2, TType.I64, 'status', None, None, ), # 2
     (3, TType.STRING, 'name', None, None, ), # 3
     (4, TType.STRING, 'prcid', None, None, ), # 4
     (5, TType.STRING, 'cashCard', None, None, ), # 5
@@ -70,8 +70,8 @@ class UserData:
         else:
           iprot.skip(ftype)
       elif fid == 2:
-        if ftype == TType.I32:
-          self.status = iprot.readI32();
+        if ftype == TType.I64:
+          self.status = iprot.readI64();
         else:
           iprot.skip(ftype)
       elif fid == 3:
@@ -124,8 +124,8 @@ class UserData:
       oprot.writeI64(self.fbuId)
       oprot.writeFieldEnd()
     if self.status is not None:
-      oprot.writeFieldBegin('status', TType.I32, 2)
-      oprot.writeI32(self.status)
+      oprot.writeFieldBegin('status', TType.I64, 2)
+      oprot.writeI64(self.status)
       oprot.writeFieldEnd()
     if self.name is not None:
       oprot.writeFieldBegin('name', TType.STRING, 3)

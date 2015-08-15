@@ -29,8 +29,8 @@ class CreateRequest:
 
   thrift_spec = (
     None, # 0
-    (1, TType.I64, 'channelId', None, None, ), # 1
-    (2, TType.I64, 'channelUid', None, None, ), # 2
+    (1, TType.STRING, 'channelId', None, None, ), # 1
+    (2, TType.STRING, 'channelUid', None, None, ), # 2
     (3, TType.STRUCT, 'data', (public.ttypes.UserData, public.ttypes.UserData.thrift_spec), None, ), # 3
   )
 
@@ -49,13 +49,13 @@ class CreateRequest:
       if ftype == TType.STOP:
         break
       if fid == 1:
-        if ftype == TType.I64:
-          self.channelId = iprot.readI64();
+        if ftype == TType.STRING:
+          self.channelId = iprot.readString();
         else:
           iprot.skip(ftype)
       elif fid == 2:
-        if ftype == TType.I64:
-          self.channelUid = iprot.readI64();
+        if ftype == TType.STRING:
+          self.channelUid = iprot.readString();
         else:
           iprot.skip(ftype)
       elif fid == 3:
@@ -75,12 +75,12 @@ class CreateRequest:
       return
     oprot.writeStructBegin('CreateRequest')
     if self.channelId is not None:
-      oprot.writeFieldBegin('channelId', TType.I64, 1)
-      oprot.writeI64(self.channelId)
+      oprot.writeFieldBegin('channelId', TType.STRING, 1)
+      oprot.writeString(self.channelId)
       oprot.writeFieldEnd()
     if self.channelUid is not None:
-      oprot.writeFieldBegin('channelUid', TType.I64, 2)
-      oprot.writeI64(self.channelUid)
+      oprot.writeFieldBegin('channelUid', TType.STRING, 2)
+      oprot.writeString(self.channelUid)
       oprot.writeFieldEnd()
     if self.data is not None:
       oprot.writeFieldBegin('data', TType.STRUCT, 3)
@@ -120,21 +120,24 @@ class CreateRequest:
 class CreateResponse:
   """
   Attributes:
-   - status
-   - fbu_id
+   - errCode
+   - errMessage
+   - fbuId
    - token
   """
 
   thrift_spec = (
     None, # 0
-    (1, TType.I32, 'status', None, None, ), # 1
-    (2, TType.I64, 'fbu_id', None, None, ), # 2
-    (3, TType.STRING, 'token', None, None, ), # 3
+    (1, TType.I64, 'errCode', None, None, ), # 1
+    (2, TType.STRING, 'errMessage', None, None, ), # 2
+    (3, TType.I64, 'fbuId', None, None, ), # 3
+    (4, TType.STRING, 'token', None, None, ), # 4
   )
 
-  def __init__(self, status=None, fbu_id=None, token=None,):
-    self.status = status
-    self.fbu_id = fbu_id
+  def __init__(self, errCode=None, errMessage=None, fbuId=None, token=None,):
+    self.errCode = errCode
+    self.errMessage = errMessage
+    self.fbuId = fbuId
     self.token = token
 
   def read(self, iprot):
@@ -147,16 +150,21 @@ class CreateResponse:
       if ftype == TType.STOP:
         break
       if fid == 1:
-        if ftype == TType.I32:
-          self.status = iprot.readI32();
+        if ftype == TType.I64:
+          self.errCode = iprot.readI64();
         else:
           iprot.skip(ftype)
       elif fid == 2:
-        if ftype == TType.I64:
-          self.fbu_id = iprot.readI64();
+        if ftype == TType.STRING:
+          self.errMessage = iprot.readString();
         else:
           iprot.skip(ftype)
       elif fid == 3:
+        if ftype == TType.I64:
+          self.fbuId = iprot.readI64();
+        else:
+          iprot.skip(ftype)
+      elif fid == 4:
         if ftype == TType.STRING:
           self.token = iprot.readString();
         else:
@@ -171,33 +179,40 @@ class CreateResponse:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('CreateResponse')
-    if self.status is not None:
-      oprot.writeFieldBegin('status', TType.I32, 1)
-      oprot.writeI32(self.status)
+    if self.errCode is not None:
+      oprot.writeFieldBegin('errCode', TType.I64, 1)
+      oprot.writeI64(self.errCode)
       oprot.writeFieldEnd()
-    if self.fbu_id is not None:
-      oprot.writeFieldBegin('fbu_id', TType.I64, 2)
-      oprot.writeI64(self.fbu_id)
+    if self.errMessage is not None:
+      oprot.writeFieldBegin('errMessage', TType.STRING, 2)
+      oprot.writeString(self.errMessage)
+      oprot.writeFieldEnd()
+    if self.fbuId is not None:
+      oprot.writeFieldBegin('fbuId', TType.I64, 3)
+      oprot.writeI64(self.fbuId)
       oprot.writeFieldEnd()
     if self.token is not None:
-      oprot.writeFieldBegin('token', TType.STRING, 3)
+      oprot.writeFieldBegin('token', TType.STRING, 4)
       oprot.writeString(self.token)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()
 
   def validate(self):
-    if self.status is None:
-      raise TProtocol.TProtocolException(message='Required field status is unset!')
-    if self.fbu_id is None:
-      raise TProtocol.TProtocolException(message='Required field fbu_id is unset!')
+    if self.errCode is None:
+      raise TProtocol.TProtocolException(message='Required field errCode is unset!')
+    if self.errMessage is None:
+      raise TProtocol.TProtocolException(message='Required field errMessage is unset!')
+    if self.fbuId is None:
+      raise TProtocol.TProtocolException(message='Required field fbuId is unset!')
     return
 
 
   def __hash__(self):
     value = 17
-    value = (value * 31) ^ hash(self.status)
-    value = (value * 31) ^ hash(self.fbu_id)
+    value = (value * 31) ^ hash(self.errCode)
+    value = (value * 31) ^ hash(self.errMessage)
+    value = (value * 31) ^ hash(self.fbuId)
     value = (value * 31) ^ hash(self.token)
     return value
 

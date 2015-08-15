@@ -2,7 +2,7 @@ namespace java com.baidu.fpu.usercenter.model.dto
 
 struct UserData{
     1:required i64 fbuId;
-    2:required i32 status;
+    2:required i64 status;
     3:required string name;
     4:required string prcid;
     5:required string cashCard;

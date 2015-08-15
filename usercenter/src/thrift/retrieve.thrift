@@ -12,12 +12,13 @@ struct RetrieveRequest{
 
 //response
 struct RetrieveResponse{
-    1:required i32 status;
+    1:required i64 status;
     2:required string message;
     3:required string fbuId;
     4:optional public.UserData data;
 }
 
 service RetrieveSerivce{
-    RetrieveResponse get(1:RetrieveRequest request)
+    RetrieveResponse info(1:RetrieveRequest request);
+    bool isExist(1:RetrieveRequest request);
 }

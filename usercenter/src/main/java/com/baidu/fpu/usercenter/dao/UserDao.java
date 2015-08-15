@@ -9,5 +9,7 @@ public interface UserDao {
 
     public User get(long id);
 
+    public User getByPrcid(String prcid);
+
     public int update(User user);
 }

@@ -28,4 +28,17 @@
     <select id="get" parameterType="long" resultMap="userResultMap">
         SELECT * FROM tbl_user WHERE id=#{id}
     </select>
+
+    <select id="getByPrcid" parameterType="String" resultMap="userResultMap">
+        SELECT * FROM tbl_user WHERE c_prcid=#{prcid};
+    </select>
+
+    <update id="update" parameterType="com.baidu.fpu.usercenter.model.po.User">
+        UPDATE tbl_user SET
+            c_name=#{cName},
+            c_prcid=#{cPrcid},
+            c_cash_card=#{cCashCard},
+            c_update_time=now()
+        WHERE id=#{id};
+    </update>
 </mapper>

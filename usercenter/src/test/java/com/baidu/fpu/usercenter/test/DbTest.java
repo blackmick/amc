@@ -1,10 +1,9 @@
 package com.baidu.fpu.usercenter.test;
 
 import com.baidu.fpu.usercenter.model.po.User;
-import com.baidu.fpu.usercenter.service.UserService;
+import com.baidu.fpu.usercenter.model.service.intf.UserService;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert.*;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

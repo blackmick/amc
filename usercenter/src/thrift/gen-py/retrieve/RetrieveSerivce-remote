@@ -24,7 +24,8 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print('Usage: ' + sys.argv[0] + ' [-h host[:port]] [-u url] [-f[ramed]] [-s[sl]] function [arg1 [arg2...]]')
   print('')
   print('Functions:')
-  print('  RetrieveResponse get(RetrieveRequest request)')
+  print('  RetrieveResponse info(RetrieveRequest request)')
+  print('  bool isExist(RetrieveRequest request)')
   print('')
   sys.exit(0)
 
@@ -81,11 +82,17 @@ protocol = TBinaryProtocol.TBinaryProtocol(transport)
 client = RetrieveSerivce.Client(protocol)
 transport.open()
 
-if cmd == 'get':
+if cmd == 'info':
   if len(args) != 1:
-    print('get requires 1 args')
+    print('info requires 1 args')
     sys.exit(1)
-  pp.pprint(client.get(eval(args[0]),))
+  pp.pprint(client.info(eval(args[0]),))
+
+elif cmd == 'isExist':
+  if len(args) != 1:
+    print('isExist requires 1 args')
+    sys.exit(1)
+  pp.pprint(client.isExist(eval(args[0]),))
 
 else:
   print('Unrecognized method %s' % cmd)

@@ -1,8 +1,8 @@
-package com.baidu.fpu.usercenter.service.impl;
+package com.baidu.fpu.usercenter.model.service.impl;
 
 import com.baidu.fpu.usercenter.dao.ChannelUserDao;
 import com.baidu.fpu.usercenter.model.po.ChannelUser;
-import com.baidu.fpu.usercenter.service.ChannelUserService;
+import com.baidu.fpu.usercenter.model.service.intf.ChannelUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class ChannelUserServiceImpl implements ChannelUserService {
         return channelUserDao.getById(id);
     }
 
-    public ChannelUser get(long channelId, long channelUid){
+    public ChannelUser get(String channelId, String channelUid){
         return channelUserDao.getByChannel(channelId, channelUid);
     }
 

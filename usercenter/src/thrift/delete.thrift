@@ -1,12 +1,13 @@
 namespace java com.baidu.fpu.usercenter.model.dto
 
 struct DeleteRequest{
-    1: required i64 channelId;
-    2: required i64 channelUid;
+    1: required string channelId;
+    2: required string channelUid;
 }
 
 struct DeleteResponse{
-    1: i32 status
+    1: required i64 errCode;
+    2: optional string errMessage;
 }
 
 service DeleteService{

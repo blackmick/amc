@@ -15,9 +15,9 @@ public class ChannelUser {
 
     private Long cUid;
 
-    private Long cChannelId;
+    private String cChannelId;
 
-    private Long cChannelUserId;
+    private String cChannelUserId;
 
     private String cPrcid;
 
@@ -95,19 +95,19 @@ public class ChannelUser {
         this.cUid = cUid;
     }
 
-    public Long getcChannelId() {
+    public String getcChannelId() {
         return cChannelId;
     }
 
-    public void setcChannelId(Long cChannelId) {
+    public void setcChannelId(String cChannelId) {
         this.cChannelId = cChannelId;
     }
 
-    public Long getcChannelUserId() {
+    public String getcChannelUserId() {
         return cChannelUserId;
     }
 
-    public void setcChannelUserId(Long cChannelUserId) {
+    public void setcChannelUserId(String cChannelUserId) {
         this.cChannelUserId = cChannelUserId;
     }
 

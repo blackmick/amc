@@ -1,8 +1,8 @@
-package com.baidu.fpu.usercenter.service.impl;
+package com.baidu.fpu.usercenter.model.service.impl;
 
 import com.baidu.fpu.usercenter.dao.ChannelMetaDao;
 import com.baidu.fpu.usercenter.model.po.ChannelMeta;
-import com.baidu.fpu.usercenter.service.ChannelMetaService;
+import com.baidu.fpu.usercenter.model.service.intf.ChannelMetaService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

@@ -1,4 +1,4 @@
-package com.baidu.fpu.usercenter.service;
+package com.baidu.fpu.usercenter.model.service.intf;
 
 import com.baidu.fpu.usercenter.model.po.ChannelMeta;
 

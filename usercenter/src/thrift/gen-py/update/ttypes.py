@@ -29,8 +29,8 @@ class UpdateRequest:
 
   thrift_spec = (
     None, # 0
-    (1, TType.I64, 'channelId', None, None, ), # 1
-    (2, TType.I64, 'channelUid', None, None, ), # 2
+    (1, TType.STRING, 'channelId', None, None, ), # 1
+    (2, TType.STRING, 'channelUid', None, None, ), # 2
     (3, TType.STRUCT, 'data', (public.ttypes.UserData, public.ttypes.UserData.thrift_spec), None, ), # 3
   )
 
@@ -49,13 +49,13 @@ class UpdateRequest:
       if ftype == TType.STOP:
         break
       if fid == 1:
-        if ftype == TType.I64:
-          self.channelId = iprot.readI64();
+        if ftype == TType.STRING:
+          self.channelId = iprot.readString();
         else:
           iprot.skip(ftype)
       elif fid == 2:
-        if ftype == TType.I64:
-          self.channelUid = iprot.readI64();
+        if ftype == TType.STRING:
+          self.channelUid = iprot.readString();
         else:
           iprot.skip(ftype)
       elif fid == 3:
@@ -75,12 +75,12 @@ class UpdateRequest:
       return
     oprot.writeStructBegin('UpdateRequest')
     if self.channelId is not None:
-      oprot.writeFieldBegin('channelId', TType.I64, 1)
-      oprot.writeI64(self.channelId)
+      oprot.writeFieldBegin('channelId', TType.STRING, 1)
+      oprot.writeString(self.channelId)
       oprot.writeFieldEnd()
     if self.channelUid is not None:
-      oprot.writeFieldBegin('channelUid', TType.I64, 2)
-      oprot.writeI64(self.channelUid)
+      oprot.writeFieldBegin('channelUid', TType.STRING, 2)
+      oprot.writeString(self.channelUid)
       oprot.writeFieldEnd()
     if self.data is not None:
       oprot.writeFieldBegin('data', TType.STRUCT, 3)
@@ -120,21 +120,21 @@ class UpdateRequest:
 class UpdateResponse:
   """
   Attributes:
-   - status
-   - message
+   - errCode
+   - errMessage
    - data
   """
 
   thrift_spec = (
     None, # 0
-    (1, TType.I32, 'status', None, None, ), # 1
-    (2, TType.STRING, 'message', None, None, ), # 2
+    (1, TType.I64, 'errCode', None, None, ), # 1
+    (2, TType.STRING, 'errMessage', None, None, ), # 2
     (3, TType.STRUCT, 'data', (public.ttypes.UserData, public.ttypes.UserData.thrift_spec), None, ), # 3
   )
 
-  def __init__(self, status=None, message=None, data=None,):
-    self.status = status
-    self.message = message
+  def __init__(self, errCode=None, errMessage=None, data=None,):
+    self.errCode = errCode
+    self.errMessage = errMessage
     self.data = data
 
   def read(self, iprot):
@@ -147,13 +147,13 @@ class UpdateResponse:
       if ftype == TType.STOP:
         break
       if fid == 1:
-        if ftype == TType.I32:
-          self.status = iprot.readI32();
+        if ftype == TType.I64:
+          self.errCode = iprot.readI64();
         else:
           iprot.skip(ftype)
       elif fid == 2:
         if ftype == TType.STRING:
-          self.message = iprot.readString();
+          self.errMessage = iprot.readString();
         else:
           iprot.skip(ftype)
       elif fid == 3:
@@ -172,13 +172,13 @@ class UpdateResponse:
       oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
       return
     oprot.writeStructBegin('UpdateResponse')
-    if self.status is not None:
-      oprot.writeFieldBegin('status', TType.I32, 1)
-      oprot.writeI32(self.status)
+    if self.errCode is not None:
+      oprot.writeFieldBegin('errCode', TType.I64, 1)
+      oprot.writeI64(self.errCode)
       oprot.writeFieldEnd()
-    if self.message is not None:
-      oprot.writeFieldBegin('message', TType.STRING, 2)
-      oprot.writeString(self.message)
+    if self.errMessage is not None:
+      oprot.writeFieldBegin('errMessage', TType.STRING, 2)
+      oprot.writeString(self.errMessage)
       oprot.writeFieldEnd()
     if self.data is not None:
       oprot.writeFieldBegin('data', TType.STRUCT, 3)
@@ -188,17 +188,17 @@ class UpdateResponse:
     oprot.writeStructEnd()
 
   def validate(self):
-    if self.status is None:
-      raise TProtocol.TProtocolException(message='Required field status is unset!')
-    if self.message is None:
-      raise TProtocol.TProtocolException(message='Required field message is unset!')
+    if self.errCode is None:
+      raise TProtocol.TProtocolException(message='Required field errCode is unset!')
+    if self.errMessage is None:
+      raise TProtocol.TProtocolException(message='Required field errMessage is unset!')
     return
 
 
   def __hash__(self):
     value = 17
-    value = (value * 31) ^ hash(self.status)
-    value = (value * 31) ^ hash(self.message)
+    value = (value * 31) ^ hash(self.errCode)
+    value = (value * 31) ^ hash(self.errMessage)
     value = (value * 31) ^ hash(self.data)
     return value
 
