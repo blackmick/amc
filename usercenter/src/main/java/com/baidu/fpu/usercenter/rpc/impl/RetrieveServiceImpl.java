@@ -1,8 +1,10 @@
 package com.baidu.fpu.usercenter.rpc.impl;
 
 import com.baidu.fpu.usercenter.common.util.ErrorCode;
+import com.baidu.fpu.usercenter.dao.UserDao;
 import com.baidu.fpu.usercenter.model.dto.RetrieveRequest;
 import com.baidu.fpu.usercenter.model.dto.RetrieveResponse;
+import com.baidu.fpu.usercenter.model.dto.UserData;
 import com.baidu.fpu.usercenter.model.po.ChannelUser;
 import com.baidu.fpu.usercenter.model.po.User;
 import com.baidu.fpu.usercenter.model.service.impl.ChannelUserServiceImpl;
@@ -26,6 +28,7 @@ public class RetrieveServiceImpl implements RetrieveSerivce.Iface {
 
     @Override
     public RetrieveResponse get(RetrieveRequest request){
+        LOG.debug("RetrieveServiceImpl.get entry.");
         RetrieveResponse response = new RetrieveResponse();
         int errCode;
 
@@ -54,8 +57,23 @@ public class RetrieveServiceImpl implements RetrieveSerivce.Iface {
             return response;
         }
 
-        request.getChannelUid();
-        request.getChannelId();
+        response = formatResponse(channelUser, user);
+        LOG.debug("RetrieveServiceImpl.get exit.");
+        return response;
+    }
+
+    private RetrieveResponse formatResponse(ChannelUser channelUser, User user){
+        RetrieveResponse response = new RetrieveResponse();
+
+        UserData userData = new UserData();
+
+        userData.setStatus(user.getcStatus());
+        userData.setFbuId(user.getId());
+        userData.setCashCard(channelUser.getcCashCard());
+        userData.setName(user.getcName());
+        userData.setPrcid(user.getcPrcid());
+
+        response.setData(userData);
         return response;
     }
 

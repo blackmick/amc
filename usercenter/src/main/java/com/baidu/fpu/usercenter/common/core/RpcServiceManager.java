@@ -25,41 +25,36 @@ import org.slf4j.LoggerFactory;
 public class RpcServiceManager {
     private static Logger logger = LoggerFactory.getLogger(RpcServiceManager.class);
 
-//    private List<?> rpcService;
     private int port;
 
     private TServer server = null;
 
-    public boolean registerRpcServices(){
-        return true;
-    }
-
-    public boolean registerRpcService(){
-        return true;
-    }
-
-    public boolean registerProcessor(Object obj){
+    public boolean registerRpcService(TMultiplexedProcessor mp){
+        mp.registerProcessor("RetrieveService", new RetrieveSerivce.Processor<RetrieveServiceImpl>(new RetrieveServiceImpl()));
+        mp.registerProcessor("CreateService", new CreateService.Processor<CreateServiceImpl>(new CreateServiceImpl()));
+        mp.registerProcessor("UpdateService", new UpdateService.Processor<UpdateServiceImpl>(new UpdateServiceImpl()));
+        mp.registerProcessor("DeleteService", new DeleteService.Processor<DeleteServiceImpl>(new DeleteServiceImpl()));
         return true;
     }
 
     public void start(){
         logger.info("RPC server starting...");
-        registerRpcService();
         port = 8082;
         TMultiplexedProcessor mp = new TMultiplexedProcessor();
         try{
             TServerTransport st = new TServerSocket(port);
+
             //TODO:register processors by configuration.
-            mp.registerProcessor("RetrieveService", new RetrieveSerivce.Processor<RetrieveServiceImpl>(new RetrieveServiceImpl()));
-            mp.registerProcessor("CreateService", new CreateService.Processor<CreateServiceImpl>(new CreateServiceImpl()));
-            mp.registerProcessor("UpdateService", new UpdateService.Processor<UpdateServiceImpl>(new UpdateServiceImpl()));
-            mp.registerProcessor("DeleteService", new DeleteService.Processor<DeleteServiceImpl>(new DeleteServiceImpl()));
+            this.registerRpcService(mp);
+
             Args args = new Args(st);
             args.protocolFactory(new TBinaryProtocol.Factory(true, true));
             args.processor(mp);
+
             server = new TThreadPoolServer(args);
             logger.info("RPC server has been started successfully!");
             server.serve();
+            logger.info("RPC server has been ended.");
         }catch(TException e){
             logger.error(e.getMessage());
         }
